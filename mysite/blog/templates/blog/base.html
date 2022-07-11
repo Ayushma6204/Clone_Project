@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Blog</title>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="css/medium-editor.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+        <script src="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/js/medium-editor.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Smooch&display=swap" rel="stylesheet">
+    </head>
+    <body class="loader">
+        <nav class="navbar navbar-default techfonts custom-navbar">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                <li><a class='navbar-brand bigbrand' href="{% url 'post_list' %}">My Blog</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="https://www.github.com">Github</a></li> 
+                <li><a href="https://www.linkedin.com">LinkedIn</a></li> 
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'post_new' %}">New Post</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'post_draft_list' %}">Drafts</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                    <li>
+                        <a>Welcome:{{user.username}}</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a class='nav navbar-right' href="{% url 'login' %}"><span class='glyphicon glyphicon-user'></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div class="content container">
+            <div class="row">
+                <div vlass='col-md-8'>
+                    <div class="blog_posts">
+                        {% block content %}
+                     {% endblock %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
